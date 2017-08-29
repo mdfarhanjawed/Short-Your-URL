@@ -1,0 +1,18 @@
+<h1>Index</h1>
+<table>
+	<thead>
+		<th>URL</th>
+		<th></th>
+		<th>Short Url</th>		
+	</thead>
+	<tbody>
+	<% @urls.each do |url| %>	
+		<tr>
+			<td><%= url.url %></td>
+			<td></td>
+			<td><%= link_to "http://strl/#{url.short_url_id}", "http://www.#{ShortUrl.bijective_encode(url.short_url_id)}.com" %></td>
+		</tr>
+	<% end %>
+		
+	</tbody>
+</table>
