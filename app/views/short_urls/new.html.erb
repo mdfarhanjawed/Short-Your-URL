@@ -1,6 +1,6 @@
 <h1>Short your URL</h1>
 
-<%= form_tag action: 'create', method: :post, remote: true do %>
+<%= form_tag action: 'create', method: :post do %>
 	<%= text_field_tag :search %>
 	<%= submit_tag "Submit" %>
 <% end %>
