@@ -17,7 +17,8 @@ class ShortUrl < ApplicationRecord
 	end
 
 	def self.bijective_decode(s)
-	  # converting from string to number for identification	  
+	  # converting from string to number for identification	
+	  return nil if s.include? "."
 	  i = 0
 	  base = ALPHABET.length
 	  s.each_char { |c| i = i * base + ALPHABET.index(c) }

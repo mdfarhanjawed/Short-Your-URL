@@ -1,7 +1,13 @@
 class ShortUrlsController < ApplicationController
 
 	def index
-		@urls = ShortUrl.all.order(count: :desc)
+		if params[:search]
+			key = params[:search].gsub('http://strl/','')			
+			short_url_id = ShortUrl.bijective_decode(key)
+			@urls = ShortUrl.where(unique_key: short_url_id)
+		else		
+			@urls = ShortUrl.all.order(count: :desc)
+		end
 	end
 
 	def new
@@ -10,6 +16,7 @@ class ShortUrlsController < ApplicationController
 	def create		
 		if params[:search].present?			
 			url = ShortUrl.get_host_without_www(params[:search]).gsub(/.com/,'') 
+
 			if ShortUrl.last
 				last_key = ShortUrl.last.unique_key+1 
 				short_url   = ShortUrl.bijective_encode(last_key)

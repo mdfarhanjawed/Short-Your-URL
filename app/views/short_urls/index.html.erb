@@ -1,4 +1,11 @@
 <h1>Recently Access URLs</h1></br>
+
+<p>Write Your Short URL for Searching</p>
+<%= form_tag "short_urls#index", method: :get do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag "Submit", class: "btn btn-primary" %>
+<% end %>
+
 <table class="table table-striped">
 	<thead class="thead-inverse">
 		<th>URL</th>
