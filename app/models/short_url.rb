@@ -1,5 +1,5 @@
 class ShortUrl < ApplicationRecord
-	validates_uniqueness_of :short_url_id 
+	validates_uniqueness_of :short_url
 
 	ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split(//)
 	  # make your own alphabet using:	  

@@ -9,14 +9,20 @@ class ShortUrlsController < ApplicationController
 
 	def create		
 		if params[:search].present?			
-			url        = ShortUrl.get_host_without_www(params[:search]).gsub(/.com/,'') 
-			url_id     = ShortUrl.bijective_decode(url)	
+			url = ShortUrl.get_host_without_www(params[:search]).gsub(/.com/,'') 
+			if ShortUrl.last
+				last_key = ShortUrl.last.unique_key+1 
+				short_url   = ShortUrl.bijective_encode(last_key)
+			else
+				last_key = 125
+				short_url = ShortUrl.bijective_encode(last_key)
+			end
 
-			if record = ShortUrl.find_by(short_url_id: url_id)				
+			if record = ShortUrl.find_by(url: url)				
 				record.count = record.count + 1
 				record.save
 			else
-				ShortUrl.create(url: params[:search], short_url_id: url_id, count: 1)
+				ShortUrl.create(url: url, short_url: short_url, count: 1, unique_key: last_key)
 			end
 		end
 

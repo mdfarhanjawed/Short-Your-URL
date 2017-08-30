@@ -4,15 +4,16 @@
 		<th>URL</th>
 		<th></th>
 		<th>Short Url</th>
-		<th>Number of Search for the URL</th>		
+		<th>Number of Times the URL is Searched</th>		
 	</thead>
 	<tbody>
-	<% @urls.each do |url| %>	
+	<% @urls.each do |single_url| %>	
 		<tr>
-			<td><%= url.url %></td>
+			<td><%= single_url.url %></td>
 			<td></td>
-			<td><%= link_to "http://strl/#{url.short_url_id}", "http://www.#{ShortUrl.bijective_encode(url.short_url_id)}.com" %></td>
-			<td><%= url.count %></td>
+			<% url_id = ShortUrl.bijective_decode(single_url.short_url)%>
+			<td><%= link_to "http://strl/#{single_url.short_url}", "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com" %></td>
+			<td><%= single_url.count %></td>
 		</tr>
 	<% end %>
 		
