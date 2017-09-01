@@ -1,26 +1,29 @@
-# README
+Rails Application to help you generate short URL for your long URL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Install Dependencies
 
-Things you may want to cover:
+	->  To install dependencies run below command:
+ 
+    ->  $ bundle install
 
-* Ruby version: 2.3.0p0
+For Creating Database
 
-* Rails version:  5.0.5
+ 	->  $ rake db:create
 
-* System dependencies: UNIX
+For Running the Migration
 
-* Configuration
+ 	-> 	$ rake db:migrate    
 
-* Database creation: mysql
+To start the application
 
-* Database initialization
+    In development mode
 
-* How to run the test suite
+    ->  $ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> 
+    ->  rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+To check the live Version of the app, Please go to:
+	
+	->  https://secure-ravine-12192.herokuapp.com
 
-* Deployment instructions
+        
 
-* ...

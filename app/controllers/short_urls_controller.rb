@@ -6,7 +6,7 @@ class ShortUrlsController < ApplicationController
 			short_url_id = ShortUrl.bijective_decode(key)
 			@urls = ShortUrl.where(unique_key: short_url_id)
 		else		
-			@urls = ShortUrl.all.order(count: :desc)
+			@urls = ShortUrl.all.order(count: :desc).limit(100)
 		end
 	end
 
