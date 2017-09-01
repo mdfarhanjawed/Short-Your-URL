@@ -37,9 +37,12 @@ class ShortUrlsController < ApplicationController
 	end
 
 	def original
-		single_url = ShortUrl.find_by(short_url: params[:url])		
-		url_id = ShortUrl.bijective_decode(single_url.short_url)
-		host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com"
-		redirect_to host_url
+		if params[:url].present?
+			single_url = ShortUrl.find_by(short_url: params[:url])	
+			single_url.count = single_url.count+1	
+			url_id = ShortUrl.bijective_decode(single_url.short_url)
+			host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com"
+			redirect_to host_url
+		end
 	end
 end

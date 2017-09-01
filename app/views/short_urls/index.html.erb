@@ -18,7 +18,7 @@
 		<tr>
 			<td><%= single_url.url %></td>
 			<td></td>			
-			<td><%= link_to "https://secure-ravine-12192.herokuapp.com/original/#{single_url.short_url}", original_path(:url=>  single_url.short_url), target: :blank %></td>
+			<td><%= link_to "https://secure-ravine-12192.herokuapp.com/original?url=#{single_url.short_url}", original_path(:url=>  single_url.short_url), target: :blank %></td>
 			<td><%= single_url.count %></td>
 		</tr>
 	<% end %>
