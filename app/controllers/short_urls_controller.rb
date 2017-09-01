@@ -15,7 +15,7 @@ class ShortUrlsController < ApplicationController
 
 	def create		
 		if params[:search].present?			
-			url = ShortUrl.get_host_without_www(params[:search]).gsub(/.com/,'') # RegEx, to get only host name 'google' from 'www.google.com'
+			url = ShortUrl.get_host_without_www(params[:search]) # RegEx, to get only host name 'google' from 'www.google.com'
 
 			if ShortUrl.last # Auto Increment my unique_id
 				last_key = ShortUrl.last.unique_key+1 
@@ -42,7 +42,7 @@ class ShortUrlsController < ApplicationController
 			single_url.count = single_url.count+1
 			single_url.save	
 			url_id = ShortUrl.bijective_decode(single_url.short_url)
-			host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com"
+			host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}"
 			redirect_to host_url
 		end
 	end
