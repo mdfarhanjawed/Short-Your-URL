@@ -35,4 +35,11 @@ class ShortUrlsController < ApplicationController
 
 		redirect_to short_urls_path	
 	end
+
+	def original
+		single_url = ShortUrl.find_by(short_url: params[:url])		
+		url_id = ShortUrl.bijective_decode(single_url.short_url)
+		host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com"
+		redirect_to host_url
+	end
 end
