@@ -17,9 +17,8 @@
 	<% @urls.each do |single_url| %>	
 		<tr>
 			<td><%= single_url.url %></td>
-			<td></td>
-			<% url_id = ShortUrl.bijective_decode(single_url.short_url)%>
-			<td><%= link_to "http://strl/#{single_url.short_url}", "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}.com" %></td>
+			<td></td>			
+			<td><%= link_to "http://strl/#{single_url.short_url}", original_path(:url=>  single_url.short_url), target: :blank %></td>
 			<td><%= single_url.count %></td>
 		</tr>
 	<% end %>
