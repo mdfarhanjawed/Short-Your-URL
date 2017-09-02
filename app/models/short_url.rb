@@ -26,13 +26,13 @@ class ShortUrl < ApplicationRecord
 	end
 
 	def self.get_host_without_www(url) # Return Host name of URL  
-	  if url.include? "http://"
-	  	uri = URI.parse("#{URI.encode(url.strip)}")
+	  if url.include? "http://" or url.include? "https://"
+	  	 uri = URI.parse("#{URI.encode(url.strip)}")
 	  else
-	  	uri = URI.parse("http://#{URI.encode(url.strip)}") 
-	  end
+	  	uri = URI.parse("http://#{URI.encode(url.strip)}")	  	
+	  end	  
 
 	  host = uri.host.downcase
-	  host.start_with?('www.') ? host[4..-1] : host	 	  
+	  host.start_with?('www.') ? host[4..-1] : host	  	 	  
 	end
 end

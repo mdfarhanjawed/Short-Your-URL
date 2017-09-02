@@ -16,6 +16,13 @@ class ShortUrlsController < ApplicationController
 	def create		
 		if params[:search].present?			
 			url = ShortUrl.get_host_without_www(params[:search]) # RegEx, to get only host name 'google' from 'www.google.com'
+			uri = URI.parse(URI.encode(params[:search].strip))
+			
+			if uri.instance_of?(URI::Generic)
+    			uri = URI::HTTP.build({:host => uri.to_s}) 
+			end
+			query = "#{uri.path}#{uri.query}#{uri.fragment}"
+			binding.pry			
 
 			if ShortUrl.last # Auto Increment my unique_id
 				last_key = ShortUrl.last.unique_key+1 
@@ -29,7 +36,7 @@ class ShortUrlsController < ApplicationController
 				record.count = record.count + 1
 				record.save
 			else
-				ShortUrl.create(url: url, short_url: short_url, count: 1, unique_key: last_key) # Create New short_url 
+				ShortUrl.create(url: url, short_url: short_url, count: 1, unique_key: last_key, query_string: query) # Create New short_url 
 			end
 		end
 
@@ -42,7 +49,7 @@ class ShortUrlsController < ApplicationController
 			single_url.count = single_url.count+1
 			single_url.save	
 			url_id = ShortUrl.bijective_decode(single_url.short_url)
-			host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}"
+			host_url = "http://www.#{ShortUrl.find_by(unique_key: url_id).try(:url)}#{single_url.query_string}"
 			redirect_to host_url
 		end
 	end
