@@ -22,7 +22,7 @@ class ShortUrlsController < ApplicationController
     			uri = URI::HTTP.build({:host => uri.to_s}) 
 			end
 			query = "#{uri.path}#{uri.query}#{uri.fragment}"
-			binding.pry			
+						
 
 			if ShortUrl.last # Auto Increment my unique_id
 				last_key = ShortUrl.last.unique_key+1 
