@@ -12,7 +12,7 @@ For Creating Database
 
 For Running the Migration
 
- 	-> 	$ rake db:migrate    
+ 	-> $ rake db:migrate    
 
 To start the application
 
